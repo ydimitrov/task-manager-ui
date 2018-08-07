@@ -54,6 +54,13 @@ void TaskManager::onClientConnected() {
 				QJsonObject ret_val = val.toObject();
 				QJsonObject response = ret_val["response"].toObject();
 				processes = response["processes"].toArray();
+
+				std::vector<ProcInfo> procs;
+				for(auto it = processes.constBegin(); it != processes.constEnd(); ++it)
+				{
+					procs.push_back(it->toObject());
+				}
+
 				QJsonObject element = processes.at(0).toObject();
 				qDebug() << element["cmd"].toString();
 				qDebug() << element["resident_mem"].toDouble();
@@ -63,16 +70,16 @@ void TaskManager::onClientConnected() {
 
 			//for(const QJsonObject& process : processes) {
 			for(auto it = processes.constBegin(); it != processes.constEnd(); ++it) {
-
-				QJsonObject process = it->toObject();
-				currentProc.cmd = process["cmd"].toString();
-				currentProc.tid = process["tid"].toInt();
-				currentProc.euid = process["euid"].toInt();
-				currentProc.scpu = process["scpu"].toDouble();
-				currentProc.ucpu = process["ucpu"].toDouble();
-				currentProc.resident_memory = process["resident_memory"].toDouble();
-				currentProc.state = process["state"].toString();
-				currentSet[currentProc.tid] = currentProc;
+				currentProc = procces;
+				// QJsonObject process = it->toObject();
+				// currentProc.cmd = process["cmd"].toString();
+				// currentProc.tid = process["tid"].toInt();
+				// currentProc.euid = process["euid"].toInt();
+				// currentProc.scpu = process["scpu"].toDouble();
+				// currentProc.ucpu = process["ucpu"].toDouble();
+				// currentProc.resident_memory = process["resident_memory"].toDouble();
+				// currentProc.state = process["state"].toString();
+				// currentSet[currentProc.tid] = currentProc;
 				processId[i] = currentProc.tid;
 				i++;
 			}
@@ -97,9 +104,8 @@ void TaskManager::onClientConnected() {
 					}
 				}
 			}
+			m_procinfos = procs;
 		});
-		memcpy(prevSet, currentSet, sizeof(prevSet)); //  prevSet = currentSet
-		memset(currentSet, 0, sizeof(currentSet)); // currentSet = 0
 		sleep(3);
 	}
 }

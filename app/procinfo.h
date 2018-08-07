@@ -17,6 +17,12 @@ public:
     double resident_memory() const;
     QString state() const;
 
+    QDataStream& operator>>(QDataStream& s, ProcInfo& p)
+    QDataStream& operator<<(QDataStream& s, ProcInfo& p)
+    {
+        
+    }
+
 private:
 	QString m_cmd;
 	int m_tid;
