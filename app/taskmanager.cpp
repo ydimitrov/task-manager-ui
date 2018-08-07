@@ -47,22 +47,24 @@ void TaskManager::onClientConnected() {
 
 	while(true){
 
-		m_client.call("taskmanager", "get_process_list", QJsonValue(), [&currentSet, &prevSet, &currentProc, &lastProc](bool r, const QJsonValue& val) {
+		m_client.call("taskmanager", "get_process_list", QJsonValue(), [this, &currentSet, &prevSet](bool r, const QJsonValue& val) {
+			QJsonArray processes;
 			if (r) {
 
-				// QJsonObject ret_val = val.toObject();
-				// QJsonObject response = ret_val["response"].toObject();
-				// QJsonArray processes = response["processes"].toArray();
-				// QJsonObject element = processes.at(0).toObject();
-				// qDebug() << element["cmd"].toString();
-				// qDebug() << element["resident_mem"].toDouble();
+				QJsonObject ret_val = val.toObject();
+				QJsonObject response = ret_val["response"].toObject();
+				processes = response["processes"].toArray();
+				QJsonObject element = processes.at(0).toObject();
+				qDebug() << element["cmd"].toString();
+				qDebug() << element["resident_mem"].toDouble();
 			}
 			int processId[processes.size()]; // array to hold process IDs
 			int i = 0;
 
-			for(const QJsonObject& process : processes) {
+			//for(const QJsonObject& process : processes) {
+			for(auto it = processes.constBegin(); it != processes.constEnd(); ++it) {
 
-				// QJsonObject process = val.toObject();
+				QJsonObject process = it->toObject();
 				currentProc.cmd = process["cmd"].toString();
 				currentProc.tid = process["tid"].toInt();
 				currentProc.euid = process["euid"].toInt();
@@ -76,14 +78,14 @@ void TaskManager::onClientConnected() {
 			}
 			for(i = 0; i < processes.size(); i++ ) {
 
-				if (prevSet[processId[i]] != NULL and currentSet[processId[i]] == NULL) {
+				if (prevSet[processId[i]] != NULL && currentSet[processId[i]] == NULL) {
 
 					emit removeProcess(prevSet[processId[i]].tid);
-				} else if (prevSet[processId[i]] == NULL and currentSet[processId[i]] != NULL) {
+				} else if (prevSet[processId[i]] == NULL && currentSet[processId[i]] != NULL) {
 
 					emit addProcess(prevSet[processId[i]].cmd, prevSet[processId[i]].tid, prevSet[processId[i]].euid, prevSet[processId[i]].scpu, 
 									prevSet[processId[i]].ucpu, prevSet[processId[i]].resident_memory, prevSet[processId[i]].state);
-				} else if (prevSet[processId[i]] != NULL and currentSet[processId[i]] != NULL) {
+				} else if (prevSet[processId[i]] != NULL && currentSet[processId[i]] != NULL) {
 					if (prevSet[processId[i]].euid != currentSet[processId[i]].euid or 
 						prevSet[processId[i]].scpu != currentSet[processId[i]].scpu or
 						prevSet[processId[i]].ucpu != currentSet[processId[i]].ucpu or

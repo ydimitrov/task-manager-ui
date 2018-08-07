@@ -2,7 +2,9 @@
 #include <QString>
 #include <QSharedPointer>
 #include <QStringList>
+#include <QVector>
 #include "qafbwebsocketclient.h"
+#include "procinfo.h"
 
 #ifndef TASKMANAGER_H
 #define TASKMANAGER_H
@@ -26,6 +28,7 @@ private slots:
 
 private:
 	QAfbWebsocketClient m_client;
+	QVector<ProcInfo> m_procinfos;
 };
 
 #endif // TASKMANAGER_H
