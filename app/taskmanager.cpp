@@ -1,20 +1,19 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QtDebug>
-#include <QtCore/QUrlQuery>
-#include <json.h>
+#include <QString>
 #include <unistd.h>
-#include "taskmanager.h"
 #include <iostream>
+#include "taskmanager.h"
 
 struct ProcessObj{
-	char cmd[];
+	QString cmd;
 	int tid;
 	int euid;
 	double scpu;
 	double ucpu;
 	double resident_memory;
-	char state[];
+	QString state;
 }currentProc, lastProc;
 
 TaskManager::TaskManager(QObject* parent) : QObject(parent) {
@@ -51,10 +50,10 @@ void TaskManager::onClientConnected() {
 		m_client.call("taskmanager", "get_process_list", QJsonValue(), [&currentSet, &prevSet, &currentProc, &lastProc](bool r, const QJsonValue& val) {
 			if (r) {
 
-				QJsonObject ret_val = val.toObject();
-				QJsonObject response = ret_val["response"].toObject();
-				QJsonArray processes = response["processes"].toArray();
-				// QJsonObject element = array.at(0).toObject();
+				// QJsonObject ret_val = val.toObject();
+				// QJsonObject response = ret_val["response"].toObject();
+				// QJsonArray processes = response["processes"].toArray();
+				// QJsonObject element = processes.at(0).toObject();
 				// qDebug() << element["cmd"].toString();
 				// qDebug() << element["resident_mem"].toDouble();
 			}
@@ -97,9 +96,8 @@ void TaskManager::onClientConnected() {
 				}
 			}
 		});
-		memcpy(prevSet, currentSet, sizeof(prevSet));
-		// prevSet = currentSet;
-		memset(currentSet, 0, sizeof(currentSet));
+		memcpy(prevSet, currentSet, sizeof(prevSet)); //  prevSet = currentSet
+		memset(currentSet, 0, sizeof(currentSet)); // currentSet = 0
 		sleep(3);
 	}
 }

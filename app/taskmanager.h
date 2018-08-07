@@ -17,8 +17,8 @@ public:
     Q_INVOKABLE void open(const QUrl& url);
 
 signals:
-	void updateProcess(char cmd_[], int tid_, int euid_, double scpu_, double ucpu_, double resident_memory_, char state_);
-	void addProcess(char cmd_[], int tid_, int euid_, double scpu_, double ucpu_, double resident_memory_, char state_);
+	void updateProcess(const QString& cmd_, int tid_, int euid_, double scpu_, double ucpu_, double resident_memory_, const QString& state_);
+	void addProcess(const QString& cmd_, int tid_, int euid_, double scpu_, double ucpu_, double resident_memory_, const QString& state_);
 	void removeProcess(int tid_);
 
 private slots:
