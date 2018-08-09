@@ -16,12 +16,13 @@ public:
     double ucpu() const;
     double resident_memory() const;
     QString state() const;
+    new_function_to_compare_ProcInfo;
 
-    QDataStream& operator>>(QDataStream& s, ProcInfo& p)
-    QDataStream& operator<<(QDataStream& s, ProcInfo& p)
-    {
+//     QDataStream& operator>>(QDataStream& s, ProcInfo& p)
+//     QDataStream& operator<<(QDataStream& s, ProcInfo& p)
+//     {
         
-    }
+//     }
 
 private:
 	QString m_cmd;
