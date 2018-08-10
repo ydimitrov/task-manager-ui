@@ -28,7 +28,7 @@ private slots:
 
 private:
 	QAfbWebsocketClient m_client;
-	std::vector<ProcInfo> m_procinfos;
+	QVector<ProcInfo> m_procinfos;
 };
 
 #endif // TASKMANAGER_H

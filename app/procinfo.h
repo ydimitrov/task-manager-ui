@@ -1,13 +1,10 @@
 #pragma once
 
-#include <QObject>
 #include <QString>
+#include <QJsonObject>
 
 class ProcInfo
-    : public QObject
 {
-    Q_OBJECT
-
 public:
     QString cmd() const;
     int tid() const;
@@ -16,7 +13,16 @@ public:
     double ucpu() const;
     double resident_memory() const;
     QString state() const;
-    new_function_to_compare_ProcInfo;
+
+    explicit ProcInfo() = default;
+    explicit ProcInfo(const ProcInfo&) = default;
+    explicit ProcInfo(ProcInfo&&) = default;
+    ~ProcInfo() = default;
+
+    explicit ProcInfo(const QJsonObject& obj);
+
+    ProcInfo& operator=(const ProcInfo&) = default;
+    bool operator==(const ProcInfo& o);
 
 private:
 	QString m_cmd;

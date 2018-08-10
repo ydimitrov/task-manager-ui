@@ -2,7 +2,7 @@
 #include <QJsonObject>
 #include <QString>
 
-ProcInfo::ProcInfo(QJsonObject obj)
+ProcInfo::ProcInfo(const QJsonObject& obj)
 {
 	m_cmd = obj["cmd"].toString();
 	m_tid = obj["tid"].toInt();
@@ -13,41 +13,50 @@ ProcInfo::ProcInfo(QJsonObject obj)
 	m_state = obj["state"].toString();
 }
 
-QString ProcInfo::cmd(QJsonObject obj) const
+bool ProcInfo::operator==(const ProcInfo& o)
+{
+	if (&o == this) return true;
+	return // Adapt as require
+		m_tid == o.m_tid;
+}
+
+QString ProcInfo::cmd() const
 {
 	return m_cmd;
 }
 
-int ProcInfo::tid(QJsonObject obj) const
+int ProcInfo::tid() const
 {
 	return m_tid;
 }
 
-int ProcInfo::euid(QJsonObject obj) const
+int ProcInfo::euid() const
 {
 	return m_euid;
 }
 
-double ProcInfo::scpu(QJsonObject obj) const
+double ProcInfo::scpu() const
 {
 	return m_scpu;
 }
 
-double ProcInfo::ucpu(QJsonObject obj) const
+double ProcInfo::ucpu() const
 {
 	return m_ucpu;
 }
 
-double ProcInfo::resident_memory(QJsonObject obj) const
+double ProcInfo::resident_memory() const
 {
 	return m_resident_memory;
 }
 
-QString ProcInfo::state(QJsonObject obj) const
+QString ProcInfo::state() const
 {
 	return m_state;
 }
 
+/*
+ * TODO: either it's a member operator that take one parameter (see above), either it's a global function which take two parameters.
 bool operator==(const ProcInfo &obj) {
 	ProcInfo obj2(jobj); 
 	if(this.m_cmd == obj.m_cmd &&
@@ -62,3 +71,4 @@ bool operator==(const ProcInfo &obj) {
 		return false;
 	}
 }
+*/
