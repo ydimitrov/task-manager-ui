@@ -17,6 +17,7 @@ endif()
 add_executable(taskmanager
 	"main.cpp"
 	"taskmanager.cpp"
+	"procinfo.cpp"
 	"qml.qrc"
 )
 #qt5_use_modules(taskmanager Core Quick WebSockets)
