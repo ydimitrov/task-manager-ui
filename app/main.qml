@@ -25,14 +25,13 @@ Window {
 
 		onRemoveProcess: {
 			var index = findId(tid_);
-			libraryModel.remove(index, 1);
+			libraryModel.remove(index);
 		}
 
 		function findId(tid) {
 			for(var i = 0; i < libraryModel.count; i++) {
-				var elemId = libraryModel.get(i);
 				if(tid == libraryModel.get(i).tid) {
-	  				return elemId; 
+	  				return i;
 	  			}
 			}
 		}
