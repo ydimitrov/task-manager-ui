@@ -36,67 +36,21 @@ Window {
 	  			}
 			}
 		}
-	}
 
-	Button {
-		text: "Add +1"
-		anchors.bottom: parent.bottom
-		onClicked: {
-			
+		Component.onCompleted: {
 			taskmng.open(bindingAddress);
-			// for (var i=0; i < libraryModel.count; i++){
-			// 	libraryModel.setProperty(i, "tid", "5.95");
-			// 	console.log(libraryModel.get(i).state);
-			// 	libraryModel.append({process: "pulseaudio", tid: "690", user: "0", user_cpu: "0", system_cpu: "0", resident_memory: "6.91796875", state: "S"})
-			// }
 		}
 	}
 
 	ListModel {
 		id: libraryModel
-		// ListElement {
-		// 	cmd: "pulseaudio"
-		// 	tid: 0
-		// 	user: 0
-		// 	system_cpu: 0
-		// 	user_cpu: 0
-		// 	resident_memory: 6.91796875
-		// 	state: "S"
-		// }
-		// ListElement {
-		// 	cmd: "afm-user-daemon"
-		// 	tid: 698
-		// 	user: 0
-		// 	system_cpu: 0
-		// 	user_cpu: 0
-		// 	resident_memory: 0.8046875
-		// 	state: "S"
-		// }
-		// ListElement {
-		// 	cmd: "afbd-task-manag"
-		// 	tid: 702
-		// 	user: 0
-		// 	system_cpu: 1.296235538856066706
-		// 	user_cpu: 1851765055508666807
-		// 	resident_memory: 4.265625
-		// 	state: "R"
-		// }
-		// ListElement {
-		// 	cmd: "afbd-windowmana"
-		// 	tid: 705
-		// 	user: 0
-		// 	system_cpu: 0
-		// 	user_cpu: 0
-		// 	resident_memory: 4.5078125
-		// 	state: "S"
-		// }
 	}
 
 
 
 	TableView {
 		width: 745
-		height: 453
+		height: 480
 
 		TableViewColumn {
 			role: "cmd"
