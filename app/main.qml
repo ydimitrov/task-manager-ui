@@ -6,7 +6,7 @@ import TaskManager 1.0
 Window {
 	id: root
 	visible: true
-	width: 650
+	width: 745
 	height: 480
 
 	TaskManager {
@@ -44,59 +44,59 @@ Window {
 		onClicked: {
 			
 			taskmng.open(bindingAddress);
-			for (var i=0; i < libraryModel.count; i++){
-				libraryModel.setProperty(i, "tid", "5.95");
-				console.log(libraryModel.get(i).state);
-				//libraryModel.append({process: "pulseaudio", tid: "690", user: "0", user_cpu: "0", system_cpu: "0", resident_memory: "6.91796875", state: "S"})
-			}
+			// for (var i=0; i < libraryModel.count; i++){
+			// 	libraryModel.setProperty(i, "tid", "5.95");
+			// 	console.log(libraryModel.get(i).state);
+			// 	libraryModel.append({process: "pulseaudio", tid: "690", user: "0", user_cpu: "0", system_cpu: "0", resident_memory: "6.91796875", state: "S"})
+			// }
 		}
 	}
 
 	ListModel {
 		id: libraryModel
-		ListElement {
-			cmd: "pulseaudio"
-			tid: 0
-			user: 0
-			system_cpu: 0
-			user_cpu: 0
-			resident_memory: 6.91796875
-			state: "S"
-		}
-		ListElement {
-			cmd: "afm-user-daemon"
-			tid: 698
-			user: 0
-			system_cpu: 0
-			user_cpu: 0
-			resident_memory: 0.8046875
-			state: "S"
-		}
-		ListElement {
-			cmd: "afbd-task-manag"
-			tid: 702
-			user: 0
-			system_cpu: 1.296235538856066706
-			user_cpu: 1851765055508666807
-			resident_memory: 4.265625
-			state: "R"
-		}
-		ListElement {
-			cmd: "afbd-windowmana"
-			tid: 705
-			user: 0
-			system_cpu: 0
-			user_cpu: 0
-			resident_memory: 4.5078125
-			state: "S"
-		}
+		// ListElement {
+		// 	cmd: "pulseaudio"
+		// 	tid: 0
+		// 	user: 0
+		// 	system_cpu: 0
+		// 	user_cpu: 0
+		// 	resident_memory: 6.91796875
+		// 	state: "S"
+		// }
+		// ListElement {
+		// 	cmd: "afm-user-daemon"
+		// 	tid: 698
+		// 	user: 0
+		// 	system_cpu: 0
+		// 	user_cpu: 0
+		// 	resident_memory: 0.8046875
+		// 	state: "S"
+		// }
+		// ListElement {
+		// 	cmd: "afbd-task-manag"
+		// 	tid: 702
+		// 	user: 0
+		// 	system_cpu: 1.296235538856066706
+		// 	user_cpu: 1851765055508666807
+		// 	resident_memory: 4.265625
+		// 	state: "R"
+		// }
+		// ListElement {
+		// 	cmd: "afbd-windowmana"
+		// 	tid: 705
+		// 	user: 0
+		// 	system_cpu: 0
+		// 	user_cpu: 0
+		// 	resident_memory: 4.5078125
+		// 	state: "S"
+		// }
 	}
 
 
 
 	TableView {
-
-		width: 600
+		width: 745
+		height: 453
 
 		TableViewColumn {
 			role: "cmd"
@@ -106,21 +106,21 @@ Window {
 		TableViewColumn {
 			role: "tid"
 			title: "ID"
-			width: 50
+			width: 80
 		}
 		TableViewColumn {
 			role: "user"
 			title: "User"
-			width: 50
+			width: 80
 		}
 		TableViewColumn {
 			role: "system_cpu"
-			title: "System %CPU"
+			title: "System %"
 			width: 100
 		}
 		TableViewColumn {
 			role: "user_cpu"
-			title: "User %CPU"
+			title: "User %"
 			width: 100
 		}
 		TableViewColumn {
@@ -131,7 +131,7 @@ Window {
 		TableViewColumn {
 			role: "state"
 			title: "State"
-			width: 50
+			width: 90
 		}
 		model: libraryModel
 	}

@@ -9,7 +9,7 @@ ProcInfo::ProcInfo(const QJsonObject& obj)
 	m_euid = obj["euid"].toInt();
 	m_scpu = obj["scpu"].toDouble();
 	m_ucpu = obj["ucpu"].toDouble();
-	m_resident_memory = obj["resident_memory"].toDouble();
+	m_resident_memory = obj["resident_mem"].toDouble();
 	m_state = obj["state"].toString();
 }
 
