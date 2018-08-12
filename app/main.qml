@@ -48,8 +48,8 @@ Window {
 
 
 	TableView {
-		width: 745
-		height: 480
+		width: root.width
+		height: root.height
 
 		TableViewColumn {
 			role: "cmd"
